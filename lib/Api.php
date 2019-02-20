@@ -13,7 +13,7 @@ class Api {
   private static $publicKey;
   private static $keyId;
   private static $securityBearer;
-  private static $version = "1.0.0";
+  private static $version = "1.0.1";
   private static $authservicesUrl = "https://authservices.satispay.com";
 
   /**

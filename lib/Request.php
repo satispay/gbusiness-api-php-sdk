@@ -97,20 +97,21 @@ class Request {
 
       $signature = "(request-target): ".strtolower($options["method"])." ".$options["path"]."\n";
       $signature .= "host: ".str_replace("https://", "", Api::getAuthservicesUrl())."\n";
-      if (!empty($options["body"])) {
-        $digest = base64_encode(hash("sha256", $options["body"], true));
-        array_push($headers, "Digest: SHA-256=".$digest);
 
+      $digest = base64_encode(hash("sha256", $options["body"], true));
+      array_push($headers, "Digest: SHA-256=".$digest);
+      if (!empty($options["body"])) {
         $signature .= "content-type: application/json\n";
         $signature .= "content-length: ".strlen($options["body"])."\n";
-        $signature .= "digest: SHA-256=$digest\n";
       }
+      $signature .= "digest: SHA-256=$digest\n";
+
       $signature .= "date: $date";
 
       openssl_sign($signature, $signedSignature, $privateKey, OPENSSL_ALGO_SHA256);
       $base64SignedSignature = base64_encode($signedSignature);
 
-      $signatureHeaders = "(request-target) host date";
+      $signatureHeaders = "(request-target) host digest date";
       if (!empty($options["body"])) {
         $signatureHeaders = "(request-target) host content-type content-length digest date";
       }
