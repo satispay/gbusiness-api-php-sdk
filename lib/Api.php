@@ -57,7 +57,7 @@ class Api {
       "sign" => true
     ));
 
-    if ($result->authentication_key->role !== "ONLINE_SHOP" || $result->authentication_key->role !== "DEVICE") {
+    if ($result->authentication_key->role !== "ONLINE_SHOP" && $result->authentication_key->role !== "DEVICE") {
       throw new \Exception("Invalid authentication");
     }
 
