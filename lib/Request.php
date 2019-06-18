@@ -89,7 +89,6 @@ class Request {
 
     $privateKey = Api::getPrivateKey();
     $keyId = Api::getKeyId();
-    $securityBearer = Api::getSecurityBearer();
 
     if (!empty($privateKey) && !empty($keyId)) {
       $date = date("r");
@@ -117,8 +116,6 @@ class Request {
       }
 
       $authorizationHeader = "Signature keyId=\"$keyId\", algorithm=\"rsa-sha256\", headers=\"$signatureHeaders\", signature=\"$base64SignedSignature\"";
-    } else if (!empty($securityBearer)) {
-      $authorizationHeader = "Bearer $securityBearer";
     }
 
     if (!empty($authorizationHeader)) {
@@ -140,6 +137,28 @@ class Request {
       "Accept: application/json",
       "User-Agent: ".self::$userAgentName."/".Api::getVersion()
     );
+
+    $platformVersionHeader = Api::getPlatformVersionHeader();
+    $pluginVersionHeader = Api::getPluginVersionHeader();
+    $pluginNameHeader = Api::getPluginNameHeader();
+    $typeHeader = Api::getTypeHeader();
+
+    if (!empty($platformVersionHeader)) {
+      array_push($headers, "X-Satispay-Platformv: $platformVersionHeader");
+    }
+
+    if (!empty($pluginVersionHeader)) {
+      array_push($headers, "X-Satispay-Plugin-Version: $pluginVersionHeader");
+    }
+
+    if (!empty($pluginNameHeader)) {
+      array_push($headers, "X-Satispay-Plugin-Name: $pluginNameHeader");
+    }
+
+    if (!empty($typeHeader)) {
+      array_push($headers, "X-Satispay-Type: $typeHeader");
+    }
+
     $method = "GET";
 
     if (!empty($options["method"])) {
