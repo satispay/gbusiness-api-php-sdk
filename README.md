@@ -62,6 +62,9 @@ To enable sandbox use `setSandbox` function.
 
 ## Changelog
 
+### 1.1.1
+- Fixed composer file version
+
 ### 1.1.0
 
 - Removed `\SatispayGBusiness\Api::testAuthentication()` method.
