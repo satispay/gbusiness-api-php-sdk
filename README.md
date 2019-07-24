@@ -62,7 +62,12 @@ To enable sandbox use `setSandbox` function.
 
 ## Changelog
 
+### 1.2.0
+
+- Added `\SatispayGBusiness\PreAuthorizedPaymentToken` class.
+
 ### 1.1.1
+
 - Fixed composer file version
 
 ### 1.1.0
