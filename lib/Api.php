@@ -1,12 +1,6 @@
 <?php
 namespace SatispayGBusiness;
 
-class ApiAuthentication {
-  public $privateKey;
-  public $publicKey;
-  public $keyId;
-}
-
 class Api {
   private static $env = "production";
   private static $privateKey;
