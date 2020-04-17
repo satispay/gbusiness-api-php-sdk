@@ -10,16 +10,16 @@ $authData = json_decode(file_get_contents("authentication.json"));
 \SatispayGBusiness\Api::setPrivateKey($authData->private_key);
 \SatispayGBusiness\Api::setKeyId($authData->key_id);
 
-$payment = \SatispayGBusiness\Payment::create(array(
+$payment = \SatispayGBusiness\Payment::create([
   "flow" => "MATCH_CODE",
   "amount_unit" => 199,
   "currency" => "EUR"
-));
+]);
 
 var_dump($payment);
 
-$upayment = \SatispayGBusiness\Payment::update($payment->id, array(
+$upayment = \SatispayGBusiness\Payment::update($payment->id, [
   "action" => "CANCEL"
-));
+]);
 
 var_dump($upayment);

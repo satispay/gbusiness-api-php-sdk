@@ -10,8 +10,8 @@ $publicKey = $authentication->publicKey;
 $privateKey = $authentication->privateKey;
 $keyId = $authentication->keyId;
 
-file_put_contents("authentication.json", json_encode(array(
+file_put_contents("authentication.json", json_encode([
   "public_key" => $publicKey,
   "private_key" => $privateKey,
   "key_id" => $keyId
-), JSON_PRETTY_PRINT));
+], JSON_PRETTY_PRINT));

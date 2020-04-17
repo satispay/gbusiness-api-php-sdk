@@ -65,6 +65,7 @@ To enable sandbox use `setSandbox` function.
 ### Unreleased
 
 - Added `\SatispayGBusiness\ApiAuthentication` class.
+- Performed code refactoring to adhere to PSR2 Coding Standards 
 
 ### 1.2.0
 
