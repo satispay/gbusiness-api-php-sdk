@@ -68,7 +68,6 @@ To enable sandbox use `setSandbox` function.
 - Added `\SatispayGBusiness\Api::setPlatformHeader()` method.
 - Added `\SatispayGBusiness\Api::getTrackingHeader()` method.
 - Added `\SatispayGBusiness\Api::setTrackingHeader()` method.
-- Added `\SatispayGBusiness\Api::setTrackingHeader()` method.
 - Added `\SatispayGBusiness\Request::HEADER_OS` constant for `x-satispay-os` request header.
 - Added `\SatispayGBusiness\Request::HEADER_OS_VERSION` constant for `x-satispay-osv` request headers.
 - Added `\SatispayGBusiness\Request::HEADER_APP_VERSION` constant for `x-satispay-appv` request headers
