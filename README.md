@@ -62,6 +62,25 @@ To enable sandbox use `setSandbox` function.
 
 ## Changelog
 
+### unreleased
+
+- Added `\SatispayGBusiness\Api::getPlatformHeader()` method.
+- Added `\SatispayGBusiness\Api::setPlatformHeader()` method.
+- Added `\SatispayGBusiness\Api::getTrackingHeader()` method.
+- Added `\SatispayGBusiness\Api::setTrackingHeader()` method.
+- Added `\SatispayGBusiness\Api::setTrackingHeader()` method.
+- Added `\SatispayGBusiness\Request::HEADER_OS` constant for `x-satispay-os` request header.
+- Added `\SatispayGBusiness\Request::HEADER_OS_VERSION` constant for `x-satispay-osv` request headers.
+- Added `\SatispayGBusiness\Request::HEADER_APP_VERSION` constant for `x-satispay-appv` request headers
+- Added `\SatispayGBusiness\Request::HEADER_APP_NAME` constant for `x-satispay-appn` request headers.
+- Added `\SatispayGBusiness\Request::HEADER_DEVICE_TYPE` constant for `x-satispay-devicetype` request headers.
+- Added `\SatispayGBusiness\Request::HEADER_TRACKING_CODE` constant for `x-satispay-tracking-code` request headers.
+  
+- Changed in `\SatispayGBusiness\Request` header key from `X-Satispay-Platformv` to `x-satispay-osv`
+- Changed in `\SatispayGBusiness\Request` header key from `X-Satispay-Plugin-Version` to `x-satispay-appv`
+- Changed in `\SatispayGBusiness\Request` header key from `X-Satispay-Plugin-Name` to `x-satispay-appn`
+- Changed in `\SatispayGBusiness\Request` header key from `X-Satispay-Type` to `x-satispay-devicetype`
+
 ### 1.2.1
 
 - Added `\SatispayGBusiness\ApiAuthentication` class.
