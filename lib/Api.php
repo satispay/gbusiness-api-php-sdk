@@ -106,7 +106,6 @@ class Api
         self::$platformHeader = $value;
     }
 
-
     /**
    * Get plugin version header
    * @return string
@@ -167,6 +166,7 @@ class Api
     {
         return self::$trackingHeader;
     }
+
     /**
      * Set tracking header
      * @param string $value
