@@ -4,6 +4,12 @@ namespace SatispayGBusiness;
 class Request
 {
     private static $userAgentName = "SatispayGBusinessApiPhpSdk";
+    const HEADER_OS = 'x-satispay-os';
+    const HEADER_OS_VERSION = 'x-satispay-osv';
+    const HEADER_APP_VERSION = 'x-satispay-appv';
+    const HEADER_APP_NAME = 'x-satispay-appn';
+    const HEADER_DEVICE_TYPE = 'x-satispay-devicetype';
+    const HEADER_TRACKING_CODE = 'x-satispay-tracking-code';
 
   /**
    * GET request
@@ -150,27 +156,36 @@ class Request
         "User-Agent: ".self::$userAgentName."/".Api::getVersion()
         ];
 
+        $platformHeader = Api::getPlatformHeader();
         $platformVersionHeader = Api::getPlatformVersionHeader();
         $pluginVersionHeader = Api::getPluginVersionHeader();
         $pluginNameHeader = Api::getPluginNameHeader();
         $typeHeader = Api::getTypeHeader();
+        $trackingHeader = Api::getTrackingHeader();
+
+        if (!empty($platformHeader)) {
+            array_push($headers, self::HEADER_OS.": ".$platformHeader);
+        }
 
         if (!empty($platformVersionHeader)) {
-            array_push($headers, "X-Satispay-Platformv: $platformVersionHeader");
+            array_push($headers, self::HEADER_OS_VERSION.": ".$platformVersionHeader);
         }
 
         if (!empty($pluginVersionHeader)) {
-            array_push($headers, "X-Satispay-Plugin-Version: $pluginVersionHeader");
+            array_push($headers, self::HEADER_APP_VERSION.": ".$pluginVersionHeader);
         }
 
         if (!empty($pluginNameHeader)) {
-            array_push($headers, "X-Satispay-Plugin-Name: $pluginNameHeader");
+            array_push($headers, self::HEADER_APP_NAME.": ".$pluginNameHeader);
         }
 
         if (!empty($typeHeader)) {
-            array_push($headers, "X-Satispay-Type: $typeHeader");
+            array_push($headers, self::HEADER_DEVICE_TYPE.": ".$typeHeader);
         }
 
+        if (!empty($trackingHeader)) {
+            array_push($headers, self::HEADER_TRACKING_CODE.": ".$trackingHeader);
+        }
         $method = "GET";
 
         if (!empty($options["method"])) {
