@@ -10,11 +10,13 @@ class Api
     private static $version = "1.2.0";
     private static $authservicesUrl = "https://authservices.satispay.com";
     private static $platformVersionHeader;
+    private static $platformHeader;
     private static $pluginVersionHeader;
     private static $pluginNameHeader;
     private static $typeHeader;
+    private static $trackingHeader;
 
-  /**
+   /**
    * Generate new keys and authenticate with token
    * @param string $token
    */
@@ -87,7 +89,24 @@ class Api
         self::$platformVersionHeader = $value;
     }
 
-  /**
+    /**
+     * Get platform header
+     * @return string
+     */
+    public static function getPlatformHeader()
+    {
+        return self::$platformHeader;
+    }
+    /**
+     * Set platform header
+     * @param string $value
+     */
+    public static function setPlatformHeader($value)
+    {
+        self::$platformHeader = $value;
+    }
+
+    /**
    * Get plugin version header
    * @return string
    */
@@ -129,6 +148,7 @@ class Api
     {
         return self::$typeHeader;
     }
+
   /**
    * Set type header
    * @param string $value
@@ -136,6 +156,24 @@ class Api
     public static function setTypeHeader($value)
     {
         self::$typeHeader = $value;
+    }
+
+    /**
+     * Get tracking header
+     * @return string
+     */
+    public static function getTrackingHeader()
+    {
+        return self::$trackingHeader;
+    }
+
+    /**
+     * Set tracking header
+     * @param string $value
+     */
+    public static function setTrackingHeader($value)
+    {
+        self::$trackingHeader = $value;
     }
 
   /**
