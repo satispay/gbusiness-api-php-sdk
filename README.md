@@ -62,7 +62,7 @@ To enable sandbox use `setSandbox` function.
 
 ## Changelog
 
-### unreleased
+### 1.3.0
 
 - Added `\SatispayGBusiness\Api::getPlatformHeader()` method.
 - Added `\SatispayGBusiness\Api::setPlatformHeader()` method.
