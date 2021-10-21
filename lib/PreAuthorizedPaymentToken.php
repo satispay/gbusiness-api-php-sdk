@@ -27,4 +27,17 @@ class PreAuthorizedPaymentToken
         "sign" => true
         ]);
     }
+
+  /**
+   * Update pre authorized payment token
+   * @param string $id
+   * @param array $body
+   */
+    public static function update($id, $body)
+    {
+        return Request::put(self::$apiPath."/$id", [
+        "body" => $body,
+        "sign" => true
+        ]);
+    }    
 }
