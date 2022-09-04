@@ -252,6 +252,7 @@ class Request
 
         $curlOptions[CURLOPT_URL] = $options["url"];
         $curlOptions[CURLOPT_RETURNTRANSFER] = true;
+        $curlOptions[CURLOPT_HTTP_VERSION] = CURL_HTTP_VERSION_1_1;
 
         if ($options["method"] != "GET") {
             if ($options["method"] != "POST") {
