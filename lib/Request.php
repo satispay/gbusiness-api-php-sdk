@@ -10,6 +10,8 @@ class Request
     const HEADER_APP_NAME = 'x-satispay-appn';
     const HEADER_DEVICE_TYPE = 'x-satispay-devicetype';
     const HEADER_TRACKING_CODE = 'x-satispay-tracking-code';
+    const HEADER_IDEMPOTENCY_KEY = 'Idempotency-Key';
+
 
   /**
    * GET request
@@ -45,6 +47,9 @@ class Request
 
         if (!empty($options["sign"])) {
             $requestOptions["sign"] = $options["sign"];
+        }
+        if (!empty($options["idempotency_key"]) && is_string($options["idempotency_key"])) {
+            $requestOptions["idempotency_key"] = $options["idempotency_key"];
         }
 
         return self::request($requestOptions);
@@ -162,6 +167,10 @@ class Request
         $pluginNameHeader = Api::getPluginNameHeader();
         $typeHeader = Api::getTypeHeader();
         $trackingHeader = Api::getTrackingHeader();
+
+        if(!empty($options["idempotency_key"]) && $options["idempotency_key"] != ""){
+            array_push($headers,  self::HEADER_IDEMPOTENCY_KEY.": ".$options["idempotency_key"]);
+        }
 
         if (!empty($platformHeader)) {
             array_push($headers, self::HEADER_OS.": ".$platformHeader);
