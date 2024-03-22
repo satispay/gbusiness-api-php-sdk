@@ -8,13 +8,19 @@ class Payment
   /**
    * Create payment
    * @param array $body
+   * @param array $createOptions = [idempotency_key]
+   * @see https://developers.satispay.com/reference/idempotency
    */
-    public static function create($body)
+    public static function create($body, $createOptions = [])
     {
-        return Request::post(self::$apiPath, [
+      $options = [
         "body" => $body,
         "sign" => true
-        ]);
+      ];
+      if (!empty($createOptions["idempotency_key"]) && is_string($createOptions["idempotency_key"])) {
+        $options["idempotency_key"] = $createOptions["idempotency_key"];
+      }
+      return Request::post(self::$apiPath, $options);
     }
 
   /**
