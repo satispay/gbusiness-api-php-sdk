@@ -46,8 +46,9 @@ class SeclibRSAService extends RSAServiceContract
     {
         try {
             $rsa = new \phpseclib\Crypt\RSA();
-            $rsa->loadKey($privateKey);
-            $rsa->setEncryptionMode(\phpseclib\Crypt\RSA::ENCRYPTION_PKCS1);
+            $rsa->loadKey($privateKey, \phpseclib\Crypt\RSA::PRIVATE_FORMAT_PKCS8);
+            $rsa->setHash('sha256');
+            $rsa->setSignatureMode(\phpseclib\Crypt\RSA::SIGNATURE_PKCS1);
 
             return $rsa->sign($message);
         } catch (Exception $e) {
