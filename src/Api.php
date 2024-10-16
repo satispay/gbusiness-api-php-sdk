@@ -23,7 +23,8 @@ class Api {
      */
     public static function authenticateWithToken($token)
     {
-        $RSAKeys = RSAServiceFactory::get()::generateKeys();
+        $RSAService = RSAServiceFactory::get();
+        $RSAKeys = $RSAService::generateKeys();
 
         $generatedPrivateKey = $RSAKeys['private_key'];
         $generatedPublicKey = $RSAKeys['public_key'];

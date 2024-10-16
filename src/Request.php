@@ -141,7 +141,8 @@ class Request {
             $signature .= "digest: SHA-256=$digest\n";
             $signature .= "date: $date";
 
-            $signedSignature = RSAServiceFactory::get()::sign($privateKey, $signature);
+            $RSAService = RSAServiceFactory::get();
+            $signedSignature = $RSAService::sign($privateKey, $signature);
             $base64SignedSignature = base64_encode($signedSignature);
 
             $signatureHeaders = '(request-target) host digest date';
