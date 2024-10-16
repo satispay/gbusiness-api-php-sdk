@@ -62,6 +62,12 @@ To enable sandbox use `setSandbox` function.
 
 ## Changelog
 
+### 1.4.0
+
+- Added custom header support in every HTTP call.
+- Improve code formatting and documentation.
+- Added RSA generation fallback with seclib (available via Composer only).
+
 ### 1.3.0
 
 - Added `\SatispayGBusiness\Api::getPlatformHeader()` method.
