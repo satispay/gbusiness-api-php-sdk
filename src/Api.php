@@ -293,6 +293,6 @@ class Api {
      */
     public static function setSandbox($value = true)
     {
-        self::setEnv($value === true ? 'staging' : 'production');
+        self::setEnv((bool) $value === true ? 'staging' : 'production');
     }
 }
