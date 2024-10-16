@@ -1,14 +1,14 @@
 <?php
+
 namespace SatispayGBusiness;
 
-class Api
-{
-    private static $env = "production";
+class Api {
+    private static $env = 'production';
     private static $privateKey;
     private static $publicKey;
     private static $keyId;
-    private static $version = "1.2.0";
-    private static $authservicesUrl = "https://authservices.satispay.com";
+    private static $version = '1.4.0';
+    private static $authservicesUrl = 'https://authservices.satispay.com';
     private static $platformVersionHeader;
     private static $platformHeader;
     private static $pluginVersionHeader;
@@ -16,28 +16,28 @@ class Api
     private static $typeHeader;
     private static $trackingHeader;
 
-   /**
-   * Generate new keys and authenticate with token
-   * @param string $token
-   */
+    /**
+     * Generate new keys and authenticate with token.
+     * 
+     * @param string $token
+     */
     public static function authenticateWithToken($token)
     {
-        $pkeyResource = openssl_pkey_new([
-        "digest_alg" => "sha256",
-        "private_key_bits" => 2048
-        ]);
+        $RSAService = RSAServiceFactory::get();
+        $RSAKeys = $RSAService::generateKeys();
 
-        openssl_pkey_export($pkeyResource, $generatedPrivateKey);
+        $generatedPrivateKey = $RSAKeys['private_key'];
+        $generatedPublicKey = $RSAKeys['public_key'];
 
-        $pkeyResourceDetails = openssl_pkey_get_details($pkeyResource);
-        $generatedPublicKey = $pkeyResourceDetails["key"];
-
-        $requestResult = Request::post("/g_business/v1/authentication_keys", [
-        "body" => [
-        "public_key" => $generatedPublicKey,
-        "token" => $token
-        ]
-        ]);
+        $requestResult = Request::post(
+            '/g_business/v1/authentication_keys',
+            [
+                'body' => [
+                    'public_key' => $generatedPublicKey,
+                    'token' => $token
+                ]
+            ]
+        );
 
         self::$privateKey = $generatedPrivateKey;
         self::$publicKey = $generatedPublicKey;
@@ -47,58 +47,69 @@ class Api
         $returnClass->privateKey = $generatedPrivateKey;
         $returnClass->publicKey = $generatedPublicKey;
         $returnClass->keyId = $requestResult->key_id;
+
         return $returnClass;
     }
 
-  /**
-   * Get env
-   * @return string
-   */
+    /**
+     * Get the current environment.
+     * 
+     * @return string
+     */
     public static function getEnv()
     {
         return self::$env;
     }
-  /**
-   * Set env
-   * @param string $value
-   */
+
+    /**
+     * Set the current environment.
+     * 
+     * @param string $value
+     */
     public static function setEnv($value)
     {
         self::$env = $value;
-        if ($value == "production") {
-            self::$authservicesUrl = "https://authservices.satispay.com";
+
+        if ($value == 'production') {
+            self::$authservicesUrl = 'https://authservices.satispay.com';
         } else {
-            self::$authservicesUrl = "https://".$value.".authservices.satispay.com";
+            self::$authservicesUrl = 'https://' . $value . '.authservices.satispay.com';
         }
     }
 
-  /**
-   * Get platform version header
-   * @return string
-   */
+    /**
+     * Get platform version header.
+     * 
+     * @return string
+     */
     public static function getPlatformVersionHeader()
     {
         return self::$platformVersionHeader;
     }
-  /**
-   * Set platform version header
-   * @param string $value
-   */
+
+    /**
+     * Set platform version header.
+     * 
+     * @param string $value
+     */
     public static function setPlatformVersionHeader($value)
     {
         self::$platformVersionHeader = $value;
     }
 
     /**
-     * Get platform header
+     * Get platform header.
+     * 
      * @return string
      */
     public static function getPlatformHeader()
     {
         return self::$platformHeader;
     }
+
     /**
-     * Set platform header
+     * Set platform header.
+     * 
      * @param string $value
      */
     public static function setPlatformHeader($value)
@@ -107,17 +118,20 @@ class Api
     }
 
     /**
-   * Get plugin version header
-   * @return string
-   */
+     * Get plugin version header.
+     * 
+     * @return string
+     */
     public static function getPluginVersionHeader()
     {
         return self::$pluginVersionHeader;
     }
-  /**
-   * Set plugin version header
-   * @param string $value
-   */
+
+    /**
+     * Set plugin version header.
+     * 
+     * @param string $value
+     */
     public static function setPluginVersionHeader($value)
     {
         self::$pluginVersionHeader = $value;
@@ -131,35 +145,40 @@ class Api
     {
         return self::$pluginNameHeader;
     }
-  /**
-   * Set plugin name header
-   * @param string $value
-   */
+
+    /**
+     * Set plugin name header.
+     * 
+     * @param string $value
+     */
     public static function setPluginNameHeader($value)
     {
         self::$pluginNameHeader = $value;
     }
 
-  /**
-   * Get type header
-   * @return string
-   */
+    /**
+     * Get type header.
+     * 
+     * @return string
+     */
     public static function getTypeHeader()
     {
         return self::$typeHeader;
     }
 
-  /**
-   * Set type header
-   * @param string $value
-   */
+    /**
+     * Set type header.
+     * 
+     * @param string $value
+     */
     public static function setTypeHeader($value)
     {
         self::$typeHeader = $value;
     }
 
     /**
-     * Get tracking header
+     * Get tracking header.
+     * 
      * @return string
      */
     public static function getTrackingHeader()
@@ -168,7 +187,8 @@ class Api
     }
 
     /**
-     * Set tracking header
+     * Set tracking header.
+     * 
      * @param string $value
      */
     public static function setTrackingHeader($value)
@@ -176,97 +196,103 @@ class Api
         self::$trackingHeader = $value;
     }
 
-  /**
-   * Get private key
-   * @return string
-   */
+    /**
+     * Get private key.
+     * 
+     * @return string
+     */
     public static function getPrivateKey()
     {
         return self::$privateKey;
     }
-  /**
-   * Set private key
-   * @param string $value
-   */
+
+    /**
+     * Set the private key.
+     * 
+     * @param string $value
+     */
     public static function setPrivateKey($value)
     {
         self::$privateKey = $value;
     }
 
-  /**
-   * Get public key
-   * @return string
-   */
+    /**
+     * Get public key.
+     * 
+     * @return string
+     */
     public static function getPublicKey()
     {
         return self::$publicKey;
     }
-  /**
-   * Set public key
-   * @param string $value
-   */
+
+    /**
+     * Set the public key.
+     * 
+     * @param string $value
+     */
     public static function setPublicKey($value)
     {
         self::$publicKey = $value;
     }
 
-  /**
-   * Get key id
-   * @return string
-   */
+    /**
+     * Get the current KeyId.
+     * 
+     * @return string
+     */
     public static function getKeyId()
     {
         return self::$keyId;
     }
-  /**
-   * Set key id
-   * @param string $value
-   */
+
+    /**
+     * Set the KeyId.
+     * 
+     * @param string $value
+     */
     public static function setKeyId($value)
     {
         self::$keyId = $value;
     }
 
-  /**
-   * Get version
-   * @return string
-   */
+    /**
+     * Get version.
+     * 
+     * @return string
+     */
     public static function getVersion()
     {
         return self::$version;
     }
 
-  /**
-   * Get authservices url
-   * @return string
-   */
+    /**
+     * Get authservices url.
+     * 
+     * @return string
+     */
     public static function getAuthservicesUrl()
     {
         return self::$authservicesUrl;
     }
 
-  /**
-   * Is sandbox enabled?
-   * @return boolean
-   */
+    /**
+     * Is sandbox enabled?
+     * 
+     * @return boolean
+     */
     public static function getSandbox()
     {
-        if (self::$env == "staging") {
-            return true;
-        } else {
-            return false;
-        }
+        return self::$env === 'staging';
     }
-  /**
-   * Enable or disable sandbox
-   * @param boolean $value
-   */
-    public static function setSandbox($value)
+
+    /**
+     * Enable or disable sandbox.
+     * 
+     * @param boolean $value
+     */
+    public static function setSandbox($value = true)
     {
-        if ($value == true) {
-            self::setEnv("staging");
-        } else {
-            self::setEnv("production");
-        }
+        self::setEnv($value === true ? 'staging' : 'production');
     }
 }

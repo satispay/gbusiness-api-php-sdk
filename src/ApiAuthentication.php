@@ -2,8 +2,7 @@
 
 namespace SatispayGBusiness;
 
-class ApiAuthentication
-{
+class ApiAuthentication {
     public $privateKey;
     public $publicKey;
     public $keyId;
