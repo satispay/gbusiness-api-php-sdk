@@ -17,6 +17,7 @@
     }
   ],
   "require": {
+    "phpseclib/phpseclib": "^2",
     "php": ">=5.4.0",
     "ext-curl": "*",
     "ext-json": "*",
@@ -24,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "SatispayGBusiness\\": "lib/"
+      "SatispayGBusiness\\": "src/"
     }
   }
 }
