@@ -80,8 +80,8 @@ class Payment {
                 self::$apiPath. '/' . $id,
                 [
                     'headers' => $headers,
-                    "body" => $body,
-                    "sign" => true
+                    'body' => $body,
+                    'sign' => true
                 ]
             );
     }
