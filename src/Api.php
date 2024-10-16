@@ -3,12 +3,12 @@
 namespace SatispayGBusiness;
 
 class Api {
-    private static $env = "production";
+    private static $env = 'production';
     private static $privateKey;
     private static $publicKey;
     private static $keyId;
-    private static $version = "1.4.0";
-    private static $authservicesUrl = "https://authservices.satispay.com";
+    private static $version = '1.4.0';
+    private static $authservicesUrl = 'https://authservices.satispay.com';
     private static $platformVersionHeader;
     private static $platformHeader;
     private static $pluginVersionHeader;
@@ -23,22 +23,17 @@ class Api {
      */
     public static function authenticateWithToken($token)
     {
-        $pkeyResource = openssl_pkey_new([
-            "digest_alg" => "sha256",
-            "private_key_bits" => 2048
-        ]);
+        $RSAKeys = RSAServiceFactory::get()::generateKeys();
 
-        openssl_pkey_export($pkeyResource, $generatedPrivateKey);
-
-        $pkeyResourceDetails = openssl_pkey_get_details($pkeyResource);
-        $generatedPublicKey = $pkeyResourceDetails["key"];
+        $generatedPrivateKey = $RSAKeys['private_key'];
+        $generatedPublicKey = $RSAKeys['public_key'];
 
         $requestResult = Request::post(
-            "/g_business/v1/authentication_keys",
+            '/g_business/v1/authentication_keys',
             [
-                "body" => [
-                    "public_key" => $generatedPublicKey,
-                    "token" => $token
+                'body' => [
+                    'public_key' => $generatedPublicKey,
+                    'token' => $token
                 ]
             ]
         );
@@ -74,10 +69,10 @@ class Api {
     {
         self::$env = $value;
 
-        if ($value == "production") {
-            self::$authservicesUrl = "https://authservices.satispay.com";
+        if ($value == 'production') {
+            self::$authservicesUrl = 'https://authservices.satispay.com';
         } else {
-            self::$authservicesUrl = "https://" . $value . ".authservices.satispay.com";
+            self::$authservicesUrl = 'https://' . $value . '.authservices.satispay.com';
         }
     }
 
@@ -287,7 +282,7 @@ class Api {
      */
     public static function getSandbox()
     {
-        return self::$env === "staging";
+        return self::$env === 'staging';
     }
 
     /**
@@ -297,6 +292,6 @@ class Api {
      */
     public static function setSandbox($value = true)
     {
-        self::setEnv($value === true ? "staging" : "production");
+        self::setEnv($value === true ? 'staging' : 'production');
     }
 }
