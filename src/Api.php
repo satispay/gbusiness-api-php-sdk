@@ -7,7 +7,7 @@ class Api {
     private static $privateKey;
     private static $publicKey;
     private static $keyId;
-    private static $version = '1.4.0';
+    private static $version = '1.4.1';
     private static $authservicesUrl = 'https://authservices.satispay.com';
     private static $platformVersionHeader;
     private static $platformHeader;
