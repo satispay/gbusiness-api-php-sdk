@@ -10,6 +10,7 @@ class Request {
     const HEADER_APP_NAME = 'x-satispay-appn';
     const HEADER_DEVICE_TYPE = 'x-satispay-devicetype';
     const HEADER_TRACKING_CODE = 'x-satispay-tracking-code';
+    const HEADER_IDEMPOTENCY_KEY = 'Idempotency-Key';
 
     /**
      * Make a GET request.
