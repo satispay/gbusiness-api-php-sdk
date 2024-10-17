@@ -183,6 +183,10 @@ class Request {
             'User-Agent' => self::$userAgentName . '/' . Api::getVersion()
         ];
 
+        if (key_exists('headers', $options)) {
+            $headers = array_merge($headers, $options['headers']);
+        }
+
         $platformHeader = Api::getPlatformHeader();
         $platformVersionHeader = Api::getPlatformVersionHeader();
         $pluginVersionHeader = Api::getPluginVersionHeader();
