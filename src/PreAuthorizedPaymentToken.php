@@ -6,8 +6,8 @@ class PreAuthorizedPaymentToken {
     private static $apiPath = '/g_business/v1/pre_authorized_payment_tokens';
 
     /**
-     * Create pre authorized payment token.
-     * 
+     * Create a pre authorized payment token.
+     *
      * @param array $body
      * @param array $headers The format is: [header => value]
      */
@@ -25,8 +25,8 @@ class PreAuthorizedPaymentToken {
     }
 
     /**
-     * Get pre authorized payment token.
-     * 
+     * Get a pre authorized payment token.
+     *
      * @param string $id
      */
     public static function get($id, $headers = [])
@@ -36,6 +36,26 @@ class PreAuthorizedPaymentToken {
                 self::$apiPath . '/' . $id,
                 [
                     'headers' => $headers,
+                    'sign' => true
+                ]
+            );
+    }
+
+    /**
+     * Update a pre authorized payment token.
+     *
+     * @param string $id
+     * @param array $body
+     * @param array $headers The format is: [header => value]
+     */
+    public static function update($id, $body, $headers = [])
+    {
+        return
+            Request::put(
+                self::$apiPath. '/' . $id,
+                [
+                    'headers' => $headers,
+                    'body' => $body,
                     'sign' => true
                 ]
             );
